@@ -4,101 +4,54 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import json
 import os
-
-"""
-Using the plotter:
-
-Call it from the command line, and supply it with logdirs to experiments.
-Suppose you ran an experiment with name 'test', and you ran 'test' for 10
-random seeds. The runner code stored it in the directory structure
-
-    data
-    L test_EnvName_DateTime
-      L  0
-        L log.txt
-        L params.json
-      L  1
-        L log.txt
-        L params.json
-       .
-       .
-       .
-      L  9
-        L log.txt
-        L params.json
-
-To plot learning curves from the experiment, averaged over all random
-seeds, call
-
-    python plot.py data/test_EnvName_DateTime --value AverageReturn
-
-and voila. To see a different statistics, change what you put in for
-the keyword --value. You can also enter /multiple/ values, and it will
-make all of them in order.
+import numpy as np
+from random import randint
 
 
-Suppose you ran two experiments: 'test1' and 'test2'. In 'test2' you tried
-a different set of hyperparameters from 'test1', and now you would like
-to compare them -- see their learning curves side-by-side. Just call
+def load_base_value():
+    data = pd.read_csv('./expert_data/meanReturns.txt', header=None)
+    data = dict(zip(data[0], data[1]))
+    return data
 
-    python plot.py data/test1 data/test2
+def plot_data(data, value="", base_value=None):
+    sns.set(style="darkgrid", font_scale=1.1)
+    for k, d in data.items():
+        avgR = d['AverageReturn']
+        stdR = d['StdReturn']
+        stdMin = avgR - stdR
+        stdMax = avgR + stdR
+        color = "00000" + hex(randint(0, 256*256*256))[2:]
+        color = "#" + color[-6:]
+        sns.tsplot([stdMin, stdMax], condition=k, color=color)
 
-and it will plot them both! They will be given titles in the legend according
-to their exp_name parameters. If you want to use custom legend titles, use
-the --legend flag and then provide a title for each logdir.
+    if base_value:
+        n = len(avgR)
+        plt.plot(range(n), base_value * np.ones(n), "k:", linewidth=1)
+        plt.text(n-1, base_value, "base_line", fontsize=10)
 
-"""
-
-def plot_data(data, value="AverageReturn"):
-    if isinstance(data, list):
-        data = pd.concat(data, ignore_index=True)
-
-    sns.set(style="darkgrid", font_scale=1.5)
-    sns.tsplot(data=data, time="Iteration", value=value, unit="Unit", condition="Condition")
-    plt.legend(loc='best').draggable()
-    # plt.legend(loc='best', bbox_to_anchor=(1, 1), fontsize=8).draggable()
-    plt.show()
-
-
-def get_datasets(fpath, condition=None):
-    unit = 0
-    datasets = []
+def get_datasets(fpath, condition=None, env=''):
+    data = {}
     for root, dir, files in os.walk(fpath):
-        if 'log.txt' in files:
-            param_path = os.path.join(root,'params.json')
-            if os.path.exists(param_path):
-                params = json.load(open(param_path))
-                exp_name = params['exp_name']
-            else:
-                exp_name = root.split('/')[-1]
-
+        if 'log.txt' in files and env in root:
+            exp_name = condition or root.split('/')[-1].split('_2018')[0]
             log_path = os.path.join(root,'log.txt')
             experiment_data = pd.read_table(log_path)
-
-            experiment_data.insert(
-                len(experiment_data.columns),
-                'Unit',
-                unit
-                )
-            experiment_data.insert(
-                len(experiment_data.columns),
-                'Condition',
-                condition or exp_name
-                )
-
-            datasets.append(experiment_data)
-            unit += 1
-
-    return datasets
+            data[exp_name] = experiment_data
+    return data
 
 
 def main():
     import argparse
+    # usage: python3 plot.py ./log --env=Ant-v2
     parser = argparse.ArgumentParser()
     parser.add_argument('logdir', nargs='*')
     parser.add_argument('--legend', nargs='*')
     parser.add_argument('--value', default='AverageReturn', nargs='*')
+    parser.add_argument('--env', default='Hopper-v2')
+    parser.add_argument('--save', default=True)
     args = parser.parse_args()
+
+    base_value = load_base_value().get(args.env)
 
     use_legend = False
     if args.legend is not None:
@@ -106,20 +59,25 @@ def main():
             "Must give a legend title for each set of experiments."
         use_legend = True
 
-    data = []
     if use_legend:
         for logdir, legend_title in zip(args.logdir, args.legend):
-            data += get_datasets(logdir, legend_title)
+            data = get_datasets(logdir, legend_title, env=args.env)
     else:
         for logdir in args.logdir:
-            data += get_datasets(logdir)
+            data = get_datasets(logdir, env=args.env)
 
     if isinstance(args.value, list):
         values = args.value
     else:
         values = [args.value]
     for value in values:
-        plot_data(data, value=value)
+        plot_data(data, value, base_value)
+
+    plt.xlabel('epochs')
+    plt.ylabel('rewards')
+    if args.save:
+        plt.savefig('./log/%s.png' % args.env)
+    plt.show()
 
 if __name__ == "__main__":
     main()

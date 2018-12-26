@@ -1,5 +1,14 @@
 # CS294-112 HW 1: Imitation Learning
 
+DAgger vs BehavioralCloning:
+
+<div align="center">
+<img src="./log/Hopper-v2.png" height="200px"><img src="./log/Ant-v2.png" height="200px"><img src="./log/HalfCheetah-v2.png" height="200px">
+<img src="./log/Humanoid-v2.png" height="200px"><img src="./log/Reacher-v2.png" height="200px"><img src="./log/Walker2d-v2.png" height="200px">
+</div>
+
+----
+
 Dependencies:
  * Python **3.5**
  * Numpy version **1.14.5**

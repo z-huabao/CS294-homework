@@ -1,4 +1,5 @@
 #/usr/bin/env python3
+import sys
 import gym
 import time
 import pickle
@@ -134,9 +135,7 @@ class Robot(object):
             data_gen.extend(x, y)
 
 if __name__ == '__main__':
-    envname = 'Hopper-v2'
-    # envname = 'Ant-v2'
-    # envname = 'Humanoid-v2'
+    envname = 'Hopper-v2' if len(sys.argv) < 2 else sys.argv[1]
     epochs = 10
     rollouts = 20
     # rollouts = 5
@@ -156,7 +155,7 @@ if __name__ == '__main__':
     robot = Robot(envname, model, expert)
 
     with tf.Session():
-        tf_util.initialize()
+        # tf_util.initialize()
         robot.fit_generator(data_gen, epochs)
 
         print('\n\n----------------------------------------')

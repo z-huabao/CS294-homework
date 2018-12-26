@@ -66,6 +66,8 @@ def main():
         print('returns', returns)
         print('mean return', np.mean(returns))
         print('std of return', np.std(returns))
+        with open('./expert_data/meanReturns.txt', 'a') as f:
+            f.write("%s,%f\n" % (args.envname, np.mean(returns)))
 
         expert_data = {'observations': np.array(observations),
                        'actions': np.array(actions)}
