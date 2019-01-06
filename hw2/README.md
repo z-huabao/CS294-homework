@@ -2,6 +2,7 @@
 
 ## Experiment
 
+本来想用keras做的，但是keras只会把代码变得更加复杂，所以还是就用tf吧
 ### EXP1: CartPole-v0: small_batch vs large_batch
 <div align=center>
 <img src="./data/CartPole_small_batch.png" height="300px"><img src="./data/CartPole_large_batch.png" height="300px">
@@ -39,7 +40,7 @@
     和分类任务类似，离散的动作表示为一组概率分布，测试的时候概率最大的那个动作输出；
     和回归任务类似，连续的动作为一组数值，测试时这组数值直接输出；
 
-训练的时候动作输出不一样，动作要有随机性才能探索更多的可能:
+训练阶段动作输出和测试阶段不一样，动作要有随机性才能探索更多的可能:
 
     离散情况是按预测概率做伯努利实验，随机选择一个动作；
     连续时是为每个预测的值添加高斯噪声，使得这个动作有了概率的属性，概率服从多元正态分布;
