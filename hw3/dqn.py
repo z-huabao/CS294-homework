@@ -6,7 +6,7 @@ import gym.spaces
 import itertools
 import numpy as np
 import random
-import tensorflow                as tf
+import tensorflow as tf
 import tensorflow.contrib.layers as layers
 from collections import namedtuple
 from dqn_utils import *
@@ -106,30 +106,29 @@ class QLearner(object):
     ###############
 
     if len(self.env.observation_space.shape) == 1:
-        # This means we are running on low-dimensional observations (e.g. RAM)
-        input_shape = self.env.observation_space.shape
+      # This means we are running on low-dimensional observations (e.g. RAM)
+      input_shape = self.env.observation_space.shape
     else:
-        img_h, img_w, img_c = self.env.observation_space.shape
-        input_shape = (img_h, img_w, frame_history_len * img_c)
+      img_h, img_w, img_c = self.env.observation_space.shape
+      input_shape = (img_h, img_w, frame_history_len * img_c)
     self.num_actions = self.env.action_space.n
 
     # set up placeholders
+    dtype = tf.float32 if lander else tf.uint8
     # placeholder for current observation (or state)
-    self.obs_t_ph              = tf.placeholder(
-        tf.float32 if lander else tf.uint8, [None] + list(input_shape))
+    self.obs_t_ph = tf.placeholder(dtype, [None] + list(input_shape))
     # placeholder for current action
-    self.act_t_ph              = tf.placeholder(tf.int32,   [None])
+    self.act_t_ph = tf.placeholder(tf.int32, [None])
     # placeholder for current reward
-    self.rew_t_ph              = tf.placeholder(tf.float32, [None])
+    self.rew_t_ph = tf.placeholder(tf.float32, [None])
     # placeholder for next observation (or state)
-    self.obs_tp1_ph            = tf.placeholder(
-        tf.float32 if lander else tf.uint8, [None] + list(input_shape))
+    self.obs_tp1_ph = tf.placeholder(dtype, [None] + list(input_shape))
     # placeholder for end of episode mask
     # this value is 1 if the next state corresponds to the end of an episode,
     # in which case there is no Q-value at the next state; at the end of an
     # episode, only the current state reward contributes to the target, not the
     # next state Q-value (i.e. target is just rew_t_ph, not rew_t_ph + gamma * q_tp1)
-    self.done_mask_ph          = tf.placeholder(tf.float32, [None])
+    self.done_mask_ph = tf.placeholder(tf.float32, [None])
 
     # casting to float on GPU ensures lower data transfer times.
     if lander:
@@ -157,9 +156,17 @@ class QLearner(object):
     # Older versions of TensorFlow may require using "VARIABLES" instead of "GLOBAL_VARIABLES"
     # Tip: use huber_loss (from dqn_utils) instead of squared error when defining self.total_error
     ######
+    self.q_t = q_func(obs_t_float, self.num_actions, scope="q_func", reuse=False)
+    self.q_tp1 = q_func(obs_tp1_float, self.num_actions, scope="target_q_func", reuse=False)
 
-    # YOUR CODE HERE
+    mask = 1 - self.done_mask_ph
+    q_gt = self.rew_t_ph + mask * gamma * tf.reduce_max(self.q_tp1, axis=-1)
+    q_pd = tf.reduce_sum(self.q_t * tf.one_hot(self.act_t_ph, self.num_actions), axis=-1)
 
+    self.total_error = tf.reduce_mean(huber_loss(q_pd - q_gt))
+
+    q_func_vars = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope='q_func')
+    target_q_func_vars = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope='target_q_func')
     ######
 
     # construct optimization op (with gradient clipping)
@@ -172,7 +179,7 @@ class QLearner(object):
     update_target_fn = []
     for var, var_target in zip(sorted(q_func_vars,        key=lambda v: v.name),
                                sorted(target_q_func_vars, key=lambda v: v.name)):
-        update_target_fn.append(var_target.assign(var))
+      update_target_fn.append(var_target.assign(var))
     self.update_target_fn = tf.group(*update_target_fn)
 
     # construct the replay buffer
@@ -225,10 +232,23 @@ class QLearner(object):
     # And remember that the first time you enter this loop, the model
     # may not yet have been initialized (but of course, the first step
     # might as well be random, since you haven't trained your net...)
-
     #####
+    idx = self.replay_buffer.store_frame(self.last_obs)
+    x = self.replay_buffer.encode_recent_observation()
 
-    # YOUR CODE HERE
+    if random.random() < self.exploration.value(self.t) or not self.model_initialized:
+      action = self.env.action_space.sample()
+    else:
+      q = self.session.run(self.q_t, {self.obs_t_ph: [x]})[0]
+      action = np.argmax(q)
+
+    obs, reward, done, info = self.env.step(action)
+
+    self.replay_buffer.store_effect(idx, action, reward, done)
+
+    self.last_obs = self.env.reset() if done else obs
+
+    self.t += 1
 
   def update_model(self):
     ### 3. Perform experience replay and train the network.
@@ -272,12 +292,31 @@ class QLearner(object):
       # you should update every target_update_freq steps, and you may find the
       # variable self.num_param_updates useful for this (it was initialized to 0)
       #####
+      obs_batch, act_batch, rew_batch, next_obs_batch, done_mask = \
+            self.replay_buffer.sample(self.batch_size)
 
-      # YOUR CODE HERE
+      if not self.model_initialized:
+        initialize_interdependent_variables(self.session, tf.global_variables(), {
+                self.obs_t_ph: obs_batch,
+                self.obs_tp1_ph: next_obs_batch,
+        })
+        self.model_initialized = True
+        print('initialized model...')
+
+      feed_dict = {
+          self.obs_t_ph: obs_batch,
+          self.act_t_ph: act_batch,
+          self.rew_t_ph: rew_batch,
+          self.obs_tp1_ph: next_obs_batch,
+          self.done_mask_ph: done_mask,
+          self.learning_rate: self.optimizer_spec.lr_schedule.value(self.t),
+      }
+      self.loss = self.session.run([self.total_error, self.train_fn], feed_dict)[0]
+
+      if self.num_param_updates % self.target_update_freq == 0:
+        self.session.run(self.update_target_fn)
 
       self.num_param_updates += 1
-
-    self.t += 1
 
   def log_progress(self):
     episode_rewards = get_wrapper_by_name(self.env, "Monitor").get_episode_rewards()
@@ -289,7 +328,8 @@ class QLearner(object):
       self.best_mean_episode_reward = max(self.best_mean_episode_reward, self.mean_episode_reward)
 
     if self.t % self.log_every_n_steps == 0 and self.model_initialized:
-      print("Timestep %d" % (self.t,))
+      print("\nTimestep %d" % (self.t,))
+      print('loss: ', np.mean(self.loss))
       print("mean reward (100 episodes) %f" % self.mean_episode_reward)
       print("best mean reward %f" % self.best_mean_episode_reward)
       print("episodes %d" % len(episode_rewards))
@@ -307,6 +347,7 @@ class QLearner(object):
 
 def learn(*args, **kwargs):
   alg = QLearner(*args, **kwargs)
+  print('start runing')
   while not alg.stopping_criterion_met():
     alg.step_env()
     # at this point, the environment should have been advanced one step (and
