@@ -35,7 +35,7 @@ advantage和reward近似却不一样：
 ### Q2.1 Sanity check with Cartpole
 <div align=center> <img src="./data/CartPole-v0(ntu-ngsptu).png" height="300px"> </div>
 
-### Q2.2 Run actor-critic with more difficult tasks
+### Q2.2 Run actor-critic with (HalfCheetah-v2, InvertedPendulum-v2)
 <div align=center>
 <img src="./data/HalfCheetah-v2(ntu-ngsptu).png.png" height="300px">
 <img src="./data/InvertedPendulum-v2(ntu-ngsptu).png" height="300px">
