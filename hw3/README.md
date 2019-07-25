@@ -1,8 +1,10 @@
 ## actor-critic
 这个方法是前面策略梯度的改进，前面提到用reward-to-go来统计reward作为q值，这里希望用一个critic网络来学习q。
+
 ###critic
 
 `critic`输入observation，输出对单个q值，这里q值的含义好像不一样了，我理解是代表对今后奖励的期望（不再像之前一样是具体路径的真实奖励，而是被今后各种可能路径的奖励给平均了，从下面策略来看是依概率加权平均的）；
+
 ######如果游戏结束了，那critic的预测是无效的，应当看做0。
 
 对当前的observation有好几种q，下面从1到3，路径越来越明确，q越来越具体：
@@ -41,6 +43,7 @@ advantage和reward近似却不一样：
 </div>
 
 ## DQN
+
 ###Q-learning
 Q-learning假设有一个超大的表格，表格行是observation，列是action，数值是observation和action对应的q值。随着对环境的探索越来越多，表格也会越来越大，无穷大。然后测试时假如碰到了同样的状态后就选择q值比较大的action就是最优的路径了。
 
@@ -66,6 +69,7 @@ DQN就是用深度神经网络来代替表格，网络输入observation，输出
     因为输出q的数量有n_actions个，但实际只执行了一个action，所以也只计算那个action对应q的loss。
 
 ------------
+
 # CS294-112 HW 3: Q-Learning
 
 Dependencies:
