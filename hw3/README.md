@@ -1,4 +1,5 @@
 ## actor-critic
+
 这个方法是前面策略梯度的改进，前面提到用reward-to-go来统计reward作为q值，这里希望用一个critic网络来学习q。
 
 ###critic
@@ -17,6 +18,7 @@
 `critic`的loss用l2，或smooth-l1。
 
 ###actor
+
 上述2的q减1的q叫做advantage：`adv = q' - q`，作为`actor`动作好坏的评判标准。
 
 advantage和reward近似却不一样：
@@ -34,9 +36,11 @@ advantage和reward近似却不一样：
     循环。。。
 
 ### Q2.1 Sanity check with Cartpole
+
 <div align=center> <img src="./data/CartPole-v0(ntu-ngsptu).png" height="300px"> </div>
 
 ### Q2.2 Run actor-critic with more difficult tasks
+
 <div align=center>
 <img src="./data/HalfCheetah-v2(ntu-ngsptu).png.png" height="300px">
 <img src="./data/InvertedPendulum-v2(ntu-ngsptu).png" height="300px">
@@ -45,11 +49,13 @@ advantage和reward近似却不一样：
 ## DQN
 
 ###Q-learning
+
 Q-learning假设有一个超大的表格，表格行是observation，列是action，数值是observation和action对应的q值。随着对环境的探索越来越多，表格也会越来越大，无穷大。然后测试时假如碰到了同样的状态后就选择q值比较大的action就是最优的路径了。
 
 在探索（explore）中一开始完全使用随机action，后来表格丰富后则大概率选择q值大的action，小概率用随机action。
 
 ###Deep Q Network
+
 DQN就是用深度神经网络来代替表格，网络输入observation，输出每个action可能的q值。
 
     表格可能无穷大，神经网络的大小总是有限的；
