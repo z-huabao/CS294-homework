@@ -10,6 +10,18 @@ import tensorflow as tf
 import tensorflow.contrib.layers as layers
 from collections import namedtuple
 from dqn_utils import *
+import logz
+import inspect
+
+def setup_logger(logdir, locals_):
+    # Configure output directory for logging
+    seed = np.random.get_state()[1][0]
+    logz.configure_output_dir(logdir + '/%s/'%seed)
+    # Log experimental parameters
+    params = {k: str(locals_[k]) for k in locals_ if '__' not in k}
+    params['seed'] = str(seed)
+    logz.save_params(params)
+
 
 OptimizerSpec = namedtuple("OptimizerSpec", ["constructor", "kwargs", "lr_schedule"])
 
@@ -89,6 +101,8 @@ class QLearner(object):
     """
     assert type(env.observation_space) == gym.spaces.Box
     assert type(env.action_space)      == gym.spaces.Discrete
+    savedir = 'data/%s_%s/'%(env.name, time.strftime("%d-%m-%Y_%H-%M-%S"))
+    setup_logger(savedir, locals())
 
     self.target_update_freq = target_update_freq
     self.optimizer_spec = optimizer_spec
@@ -99,7 +113,7 @@ class QLearner(object):
     self.env = env
     self.session = session
     self.exploration = exploration
-    self.rew_file = str(uuid.uuid4()) + '.pkl' if rew_file is None else rew_file
+    self.rew_file = rew_file or savedir + str(uuid.uuid4()) + '.pkl'
 
     ###############
     # BUILD MODEL #
@@ -193,8 +207,9 @@ class QLearner(object):
     self.num_param_updates = 0
     self.mean_episode_reward      = -float('nan')
     self.best_mean_episode_reward = -float('inf')
-    self.last_obs = self.env.reset()
     self.log_every_n_steps = 10000
+    self.last_obs = self.env.reset()
+    print('observation shape:', self.last_obs.shape)
 
     self.start_time = None
     self.t = 0
@@ -328,13 +343,22 @@ class QLearner(object):
       self.best_mean_episode_reward = max(self.best_mean_episode_reward, self.mean_episode_reward)
 
     if self.t % self.log_every_n_steps == 0 and self.model_initialized:
-      print("\nTimestep %d" % (self.t,))
-      print('loss: ', np.mean(self.loss))
-      print("mean reward (100 episodes) %f" % self.mean_episode_reward)
-      print("best mean reward %f" % self.best_mean_episode_reward)
-      print("episodes %d" % len(episode_rewards))
-      print("exploration %f" % self.exploration.value(self.t))
-      print("learning_rate %f" % self.optimizer_spec.lr_schedule.value(self.t))
+      # print('\nloss: ', np.mean(self.loss))
+      logz.log_tabular("Timestep", self.t)
+      logz.log_tabular("Mean100Reward", self.mean_episode_reward)
+      logz.log_tabular("BestMeanReward", self.best_mean_episode_reward)
+      logz.log_tabular("episodes", len(episode_rewards))
+      logz.log_tabular("exploration", self.exploration.value(self.t))
+      logz.log_tabular("learning_rate", self.optimizer_spec.lr_schedule.value(self.t))
+      logz.dump_tabular()
+
+      # print("Timestep %d" % (self.t,))
+      # print("mean reward (100 episodes) %f" % self.mean_episode_reward)
+      # print("best mean reward %f" % self.best_mean_episode_reward)
+      # print("episodes %d" % len(episode_rewards))
+      # print("exploration %f" % self.exploration.value(self.t))
+      # print("learning_rate %f" % self.optimizer_spec.lr_schedule.value(self.t))
+      print("current num of buffer:", self.replay_buffer.num_in_buffer)
       if self.start_time is not None:
         print("running time %f" % ((time.time() - self.start_time) / 60.))
 

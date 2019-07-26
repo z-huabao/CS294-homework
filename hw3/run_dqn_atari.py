@@ -108,7 +108,7 @@ def get_session():
     return session
 
 def get_env(task, seed):
-    env = gym.make('PongNoFrameskip-v4')
+    env = gym.make(task)
 
     set_global_seeds(seed)
     env.seed(seed)
@@ -117,14 +117,16 @@ def get_env(task, seed):
     env = wrappers.Monitor(env, osp.join(expt_dir, "gym"), force=True)
     env = wrap_deepmind(env)
 
+    env.name = task
     return env
 
 def main():
     # Get Atari games.
-    task = gym.make('PongNoFrameskip-v4')
+    task = 'PongNoFrameskip-v4'
 
     # Run training
-    seed = random.randint(0, 9999)
+    # seed = random.randint(0, 9999)
+    seed = 1
     print('random seed = %d' % seed)
     env = get_env(task, seed)
     session = get_session()

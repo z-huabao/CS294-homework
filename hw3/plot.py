@@ -53,18 +53,19 @@ def plot_data(data, value="AverageReturn"):
         data = pd.concat(data, ignore_index=True)
 
     sns.set(style="darkgrid", font_scale=1.1)
-    sns.tsplot(data=data, time="Iteration", value=value, unit="Unit", condition="Condition")
+    # sns.tsplot(data=data, time="Iteration", value=value, unit="Unit", condition="Condition")
+    sns.tsplot(data=data, time="Timestep", value=value, unit="Unit", condition="Condition")
     plt.legend(loc='best').draggable()
 
 
-def get_datasets(fpath, condition=None):
+def build_data(fpath, condition=None):
     unit = 0
-    datasets = []
+    data = []
     for root, dir, files in os.walk(fpath):
         if 'log.txt' in files:
             param_path = open(os.path.join(root,'params.json'))
             params = json.load(param_path)
-            exp_name = params['exp_name']
+            exp_name = params.get('exp_name') or '1'
 
             log_path = os.path.join(root,'log.txt')
             experiment_data = pd.read_table(log_path)
@@ -80,10 +81,10 @@ def get_datasets(fpath, condition=None):
                 condition or exp_name
                 )
 
-            datasets.append(experiment_data)
+            data.append(experiment_data)
             unit += 1
 
-    return datasets
+    return data
 
 
 def main():
@@ -118,10 +119,10 @@ python3 plot.py \
     data = []
     if use_legend:
         for logdir, legend_title in zip(args.logdir, args.legend):
-            data += get_datasets(logdir, legend_title)
+            data += build_data(logdir, legend_title)
     else:
         for logdir in args.logdir:
-            data += get_datasets(logdir)
+            data += build_data(logdir)
 
     if isinstance(args.value, list):
         values = args.value

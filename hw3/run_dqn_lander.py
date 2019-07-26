@@ -93,7 +93,8 @@ def get_session():
     return session
 
 def get_env(seed):
-    env = gym.make('LunarLander-v2')
+    task = 'LunarLander-v2'
+    env = gym.make(task)
 
     set_global_seeds(seed)
     env.seed(seed)
@@ -101,6 +102,7 @@ def get_env(seed):
     expt_dir = '/tmp/hw3_vid_dir/'
     env = wrappers.Monitor(env, osp.join(expt_dir, "gym"), force=True)
 
+    env.name = task
     return env
 
 def main():

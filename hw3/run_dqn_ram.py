@@ -99,7 +99,8 @@ def get_session():
     return session
 
 def get_env(seed):
-    env = gym.make('Pong-ram-v0')
+    task = 'Pong-ram-v0'
+    env = gym.make(task)
 
     set_global_seeds(seed)
     env.seed(seed)
@@ -108,11 +109,12 @@ def get_env(seed):
     env = wrappers.Monitor(env, osp.join(expt_dir, "gym"), force=True)
     env = wrap_deepmind_ram(env)
 
+    env.name = task
     return env
 
 def main():
     # Run training
-    seed = 0 # Use a seed of zero (you may want to randomize the seed!)
+    seed = 1 # Use a seed of zero (you may want to randomize the seed!)
     env = get_env(seed)
     session = get_session()
     atari_learn(env, session, num_timesteps=int(4e7))
