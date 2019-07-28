@@ -101,7 +101,8 @@ class QLearner(object):
     """
     assert type(env.observation_space) == gym.spaces.Box
     assert type(env.action_space)      == gym.spaces.Discrete
-    savedir = 'data/%s_%s/'%(env.name, time.strftime("%d-%m-%Y_%H-%M-%S"))
+    suffix = 'd-dqn' if double_q else 'dqn'
+    savedir = 'data/%s_%s_%s/'%(suffix, env.name, time.strftime("%d-%m-%Y_%H-%M-%S"))
     setup_logger(savedir, locals())
 
     self.target_update_freq = target_update_freq
@@ -114,6 +115,7 @@ class QLearner(object):
     self.session = session
     self.exploration = exploration
     self.rew_file = rew_file or savedir + str(uuid.uuid4()) + '.pkl'
+    self.double_q = double_q
 
     ###############
     # BUILD MODEL #
@@ -126,6 +128,8 @@ class QLearner(object):
       img_h, img_w, img_c = self.env.observation_space.shape
       input_shape = (img_h, img_w, frame_history_len * img_c)
     self.num_actions = self.env.action_space.n
+    print('observation shape:', input_shape)
+    print('num actions:', self.num_actions)
 
     # set up placeholders
     dtype = tf.float32 if lander else tf.uint8
@@ -173,8 +177,19 @@ class QLearner(object):
     self.q_t = q_func(obs_t_float, self.num_actions, scope="q_func", reuse=False)
     self.q_tp1 = q_func(obs_tp1_float, self.num_actions, scope="target_q_func", reuse=False)
 
-    mask = 1 - self.done_mask_ph
-    q_gt = self.rew_t_ph + mask * gamma * tf.reduce_max(self.q_tp1, axis=-1)
+    if double_q:
+        # q_t = tf.reshape(self.q_t, [2, -1, self.num_actions])
+        # self.q_t = q_t[0]
+        # id_p1 = tf.argmax(q_t[1], axis=-1)
+        id_p1 = tf.argmax(self.q_t[self.batch_size:], axis=-1)
+        indices = tf.stack([tf.range(self.batch_size, dtype=tf.int64), id_p1], axis=1)
+        q_max = tf.gather_nd(self.q_tp1, indices)
+
+        self.q_t = self.q_t[:self.batch_size]
+    else:
+        q_max = tf.reduce_max(self.q_tp1, axis=-1)
+
+    q_gt = self.rew_t_ph + (1 - self.done_mask_ph) * gamma * q_max
     q_pd = tf.reduce_sum(self.q_t * tf.one_hot(self.act_t_ph, self.num_actions), axis=-1)
 
     self.total_error = tf.reduce_mean(huber_loss(q_pd - q_gt))
@@ -209,7 +224,6 @@ class QLearner(object):
     self.best_mean_episode_reward = -float('inf')
     self.log_every_n_steps = 10000
     self.last_obs = self.env.reset()
-    print('observation shape:', self.last_obs.shape)
 
     self.start_time = None
     self.t = 0
@@ -310,16 +324,18 @@ class QLearner(object):
       obs_batch, act_batch, rew_batch, next_obs_batch, done_mask = \
             self.replay_buffer.sample(self.batch_size)
 
+      x = np.concatenate([obs_batch, next_obs_batch], 0) if self.double_q else obs_batch
+
       if not self.model_initialized:
         initialize_interdependent_variables(self.session, tf.global_variables(), {
-                self.obs_t_ph: obs_batch,
+                self.obs_t_ph: x,
                 self.obs_tp1_ph: next_obs_batch,
         })
         self.model_initialized = True
         print('initialized model...')
 
       feed_dict = {
-          self.obs_t_ph: obs_batch,
+          self.obs_t_ph: x,
           self.act_t_ph: act_batch,
           self.rew_t_ph: rew_batch,
           self.obs_tp1_ph: next_obs_batch,
