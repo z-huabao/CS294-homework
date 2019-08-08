@@ -52,10 +52,20 @@ def plot_data(data, value="AverageReturn"):
     if isinstance(data, list):
         data = pd.concat(data, ignore_index=True)
 
+    t = 'Iteration' if 'Iteration' in data.columns else 'Timestep'
+    xlabel = t
+    v = max(data[t])
+    if v > 2e6:
+        data[t] = ['%.2f'%(float(i) / 1e6) for i in data[t]]
+        xlabel += '(1e6)'
+    elif v > 2e5:
+        data[t] = ['%.2f'%(float(i) / 1e5) for i in data[t]]
+        xlabel += '(1e5)'
+
     sns.set(style="darkgrid", font_scale=1.1)
-    # sns.tsplot(data=data, time="Iteration", value=value, unit="Unit", condition="Condition")
-    sns.tsplot(data=data, time="Timestep", value=value, unit="Unit", condition="Condition")
+    sns.tsplot(data=data, time=t, value=value, unit="Unit", condition="Condition")
     plt.legend(loc='best').draggable()
+    plt.xlabel(xlabel)
 
 
 def build_data(fpath, condition=None):

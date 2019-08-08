@@ -54,7 +54,8 @@ def lander_kwargs():
         'frame_history_len': 1,
         'target_update_freq': 3000,
         'grad_norm_clipping': 10,
-        'lander': True
+        'lander': True,
+        'exp_name': '',
     }
 
 def lander_learn(env,
@@ -112,7 +113,7 @@ def main():
     env = get_env(seed)
     session = get_session()
     set_global_seeds(seed)
-    lander_learn(env, session, num_timesteps=500000, seed=seed)
+    lander_learn(env, session, num_timesteps=5e5, seed=seed)
 
 if __name__ == "__main__":
     main()

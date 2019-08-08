@@ -87,3 +87,6 @@ python3 plot.py \
     #data/ac_10_50_HalfCheetah-v2_25-07-2019_08-44-49 \
     #--legend l2s32_ntu10_ngstpu10 l3s32 l3s64 ntu50_ngstpu10 ntu10_ngstpu50 \
     #-s 'data/HalfCheetah-v2(ntu-ngsptu).png'
+
+
+#python3 run_dqn_atari.py
