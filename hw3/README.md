@@ -76,6 +76,8 @@ Double-DQN：
 ### Q1.1 Q1.2 Base Q-learning, Double Q-learning in PongNoFrameskip-v4
 <div align=center> <img src="./data/PongNoFrameskip-v4_Mean100Reward.png" height="300px"> </div>
 
+这个游戏收集数据很慢，5M步要两天，一轮实验共四天了。
+
 ### Q1.3 experiment with learning rate in LunarLander-v2
 <div align=center> <img src="./data/LunarLander-v2(lr).png" height="300px"> </div>
 
