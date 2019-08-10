@@ -1,0 +1,32 @@
+08-10 11:10:56 HalfCheetah_q2_lr1e-2 INFO     Gathering random dataset
+08-10 11:10:57 HalfCheetah_q2_lr1e-2 INFO     Creating policy
+08-10 11:10:59 HalfCheetah_q2_lr1e-2 INFO     Random policy
+08-10 11:10:59 HalfCheetah_q2_lr1e-2 INFO     ---------  ---------
+08-10 11:10:59 HalfCheetah_q2_lr1e-2 INFO     ReturnAvg  -151.737
+08-10 11:10:59 HalfCheetah_q2_lr1e-2 INFO     ReturnMax   -85.9306
+08-10 11:10:59 HalfCheetah_q2_lr1e-2 INFO     ReturnMin  -234.441
+08-10 11:10:59 HalfCheetah_q2_lr1e-2 INFO     ReturnStd    41.4153
+08-10 11:10:59 HalfCheetah_q2_lr1e-2 INFO     ---------  ---------
+08-10 11:10:59 HalfCheetah_q2_lr1e-2 DEBUG    
+08-10 11:10:59 HalfCheetah_q2_lr1e-2 DEBUG    : total      0.0 (100.0%)
+08-10 11:10:59 HalfCheetah_q2_lr1e-2 DEBUG    : other      0.0 (100.0%)
+08-10 11:10:59 HalfCheetah_q2_lr1e-2 DEBUG    
+08-10 11:10:59 HalfCheetah_q2_lr1e-2 INFO     Training policy....
+08-10 11:11:01 HalfCheetah_q2_lr1e-2 INFO     loss start to end: 0.9953812, 0.016151719
+08-10 11:11:01 HalfCheetah_q2_lr1e-2 INFO     Evaluating policy...
+08-10 11:15:21 HalfCheetah_q2_lr1e-2 INFO     Trained policy
+08-10 11:15:21 HalfCheetah_q2_lr1e-2 INFO     -----------------  -----------
+08-10 11:15:21 HalfCheetah_q2_lr1e-2 INFO     ReturnAvg          106.774
+08-10 11:15:21 HalfCheetah_q2_lr1e-2 INFO     ReturnMax          183.864
+08-10 11:15:21 HalfCheetah_q2_lr1e-2 INFO     ReturnMin          -11.7999
+08-10 11:15:21 HalfCheetah_q2_lr1e-2 INFO     ReturnStd           60.7897
+08-10 11:15:21 HalfCheetah_q2_lr1e-2 INFO     TrainingLossFinal    0.0161517
+08-10 11:15:21 HalfCheetah_q2_lr1e-2 INFO     TrainingLossStart    0.995381
+08-10 11:15:21 HalfCheetah_q2_lr1e-2 INFO     -----------------  -----------
+08-10 11:15:21 HalfCheetah_q2_lr1e-2 DEBUG    
+08-10 11:15:21 HalfCheetah_q2_lr1e-2 DEBUG    : total      261.7 (100.0%)
+08-10 11:15:21 HalfCheetah_q2_lr1e-2 DEBUG    : get action 258.6 (98.8%)
+08-10 11:15:21 HalfCheetah_q2_lr1e-2 DEBUG    : train policy 2.3 (0.9%)
+08-10 11:15:21 HalfCheetah_q2_lr1e-2 DEBUG    : env step   0.7 (0.3%)
+08-10 11:15:21 HalfCheetah_q2_lr1e-2 DEBUG    : other      0.2 (0.1%)
+08-10 11:15:21 HalfCheetah_q2_lr1e-2 DEBUG    

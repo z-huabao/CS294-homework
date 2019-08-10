@@ -1,0 +1,6 @@
+08-10 11:09:56 HalfCheetah_q1_lr1e-2 INFO     Gathering random dataset
+08-10 11:09:57 HalfCheetah_q1_lr1e-2 INFO     Creating policy
+08-10 11:09:59 HalfCheetah_q1_lr1e-2 INFO     Training policy....
+08-10 11:10:01 HalfCheetah_q1_lr1e-2 INFO     loss start to end: 1.0344286, 0.014591193
+08-10 11:10:01 HalfCheetah_q1_lr1e-2 INFO     Evaluating predictions...
+08-10 11:10:28 HalfCheetah_q1_lr1e-2 INFO     All plots saved to folder
