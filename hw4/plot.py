@@ -26,7 +26,7 @@ ax.set_xlabel('Iteration')
 ax.set_ylabel('Return')
 
 if args.save:
-    os.makedirs('plots', exist_ok=True)
-    f.savefig(os.path.join('plots', args.save + '.jpg'))
+    os.makedirs('data', exist_ok=True)
+    f.savefig(os.path.join('data', args.save + '.png'))
 else:
     plt.show()

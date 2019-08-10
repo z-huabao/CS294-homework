@@ -14,12 +14,16 @@ parser.add_argument('--render', action='store_true')
 parser.add_argument('--mpc_horizon', type=int, default=15)
 parser.add_argument('--num_random_action_selection', type=int, default=4096)
 parser.add_argument('--nn_layers', type=int, default=1)
+parser.add_argument('--use_CEM', action='store_true', help='Cross Entropy Method')
 args = parser.parse_args()
 
 data_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data')
-exp_name = '{0}_{1}_{2}'.format(args.env,
-                                args.question,
-                                args.exp_name if args.exp_name else time.strftime("%d-%m-%Y_%H-%M-%S"))
+exp_name = '{0}_{1}_{2}'.format(
+    args.env,
+    args.question,
+    args.exp_name if args.exp_name else time.strftime("%Y-%m-%d_%H-%M-%S")
+)
+
 exp_dir = os.path.join(data_dir, exp_name)
 assert not os.path.exists(exp_dir),\
     'Experiment directory {0} already exists. Either delete the directory, or run the experiment with a different name'.format(exp_dir)
@@ -30,11 +34,15 @@ env = {
     'HalfCheetah': HalfCheetahEnv()
 }[args.env]
 
-mbrl = ModelBasedRL(env=env,
-                    render=args.render,
-                    mpc_horizon=args.mpc_horizon,
-                    num_random_action_selection=args.num_random_action_selection,
-                    nn_layers=args.nn_layers)
+
+mbrl = ModelBasedRL(
+    env=env,
+    render=args.render,
+    mpc_horizon=args.mpc_horizon,
+    num_random_action_selection=args.num_random_action_selection,
+    nn_layers=args.nn_layers,
+    use_CEM=args.use_CEM,
+)
 
 run_func = {
     'q1': mbrl.run_q1,
