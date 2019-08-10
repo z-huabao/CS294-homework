@@ -8,8 +8,8 @@
 
 作业中文：https://zhuanlan.zhihu.com/codekitty
 
-* hw1 behavioral cloning and DAgger (keras implement)
-* hw2 policy gradient
-* hw3
-* hw4
+* hw1 Behavioral-Cloning and DAgger
+* hw2 Policy-Gradient
+* hw3 Actor-Critic, Q-learning
+* hw4 Model-Based RL
 * hw5
