@@ -1,0 +1,270 @@
+08-28 10:21:10 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Gathering random dataset
+08-28 10:21:10 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Creating policy
+08-28 10:21:10 HalfCheetah_q3_2019-08-28_10-21-10 INFO     action space: low([-1. -1. -1. -1. -1. -1.]), high([1. 1. 1. 1. 1. 1.]), dim(6)
+08-28 10:21:12 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: mean([0. 0. 0. 0. 0. 0.])
+08-28 10:21:12 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: std([0.5 0.5 0.5 0.5 0.5 0.5])
+08-28 10:21:12 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Iteration -1
+08-28 10:21:12 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ---------  ---------
+08-28 10:21:12 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Itr          -1
+08-28 10:21:12 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnAvg  -157.474
+08-28 10:21:12 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMax   -82.0915
+08-28 10:21:12 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMin  -260.344
+08-28 10:21:12 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnStd    46.3728
+08-28 10:21:12 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ---------  ---------
+08-28 10:21:12 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:21:12 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : total      0.0 (100.0%)
+08-28 10:21:12 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : other      0.0 (100.0%)
+08-28 10:21:12 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:21:12 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Iteration 0
+08-28 10:21:12 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Training policy...
+08-28 10:21:14 HalfCheetah_q3_2019-08-28_10-21-10 INFO     loss start to end: 1.0599823, 0.014823778
+08-28 10:21:14 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Gathering rollouts...
+08-28 10:24:01 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: mean([0. 0. 0. 0. 0. 0.])
+08-28 10:24:01 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: std([0.5 0.5 0.5 0.5 0.5 0.5])
+08-28 10:24:01 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Appending dataset...
+08-28 10:24:01 HalfCheetah_q3_2019-08-28_10-21-10 INFO     -----------------  -----------
+08-28 10:24:01 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Itr                  0
+08-28 10:24:01 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnAvg          126.178
+08-28 10:24:01 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMax          145.098
+08-28 10:24:01 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMin           99.2266
+08-28 10:24:01 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnStd           13.6382
+08-28 10:24:01 HalfCheetah_q3_2019-08-28_10-21-10 INFO     TrainingLossFinal    0.0148238
+08-28 10:24:01 HalfCheetah_q3_2019-08-28_10-21-10 INFO     TrainingLossStart    1.05998
+08-28 10:24:01 HalfCheetah_q3_2019-08-28_10-21-10 INFO     -----------------  -----------
+08-28 10:24:01 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:24:01 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : total      168.9 (100.0%)
+08-28 10:24:01 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : get action 166.4 (98.6%)
+08-28 10:24:01 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : train policy 1.7 (1.0%)
+08-28 10:24:01 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : env step   0.6 (0.4%)
+08-28 10:24:01 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : other      0.1 (0.1%)
+08-28 10:24:01 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:24:01 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Iteration 1
+08-28 10:24:01 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Training policy...
+08-28 10:24:04 HalfCheetah_q3_2019-08-28_10-21-10 INFO     loss start to end: 0.072257064, 0.013015883
+08-28 10:24:04 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Gathering rollouts...
+08-28 10:26:58 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: mean([0. 0. 0. 0. 0. 0.])
+08-28 10:26:58 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: std([0.5 0.5 0.5 0.5 0.5 0.5])
+08-28 10:26:58 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Appending dataset...
+08-28 10:26:58 HalfCheetah_q3_2019-08-28_10-21-10 INFO     -----------------  -----------
+08-28 10:26:58 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Itr                  1
+08-28 10:26:58 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnAvg           63.8162
+08-28 10:26:58 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMax          115.821
+08-28 10:26:58 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMin           25.3779
+08-28 10:26:58 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnStd           21.7245
+08-28 10:26:58 HalfCheetah_q3_2019-08-28_10-21-10 INFO     TrainingLossFinal    0.0130159
+08-28 10:26:58 HalfCheetah_q3_2019-08-28_10-21-10 INFO     TrainingLossStart    0.0722571
+08-28 10:26:58 HalfCheetah_q3_2019-08-28_10-21-10 INFO     -----------------  -----------
+08-28 10:26:58 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:26:58 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : total      177.1 (100.0%)
+08-28 10:26:58 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : get action 173.2 (97.8%)
+08-28 10:26:58 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : train policy 3.2 (1.8%)
+08-28 10:26:58 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : env step   0.6 (0.4%)
+08-28 10:26:58 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : other      0.1 (0.1%)
+08-28 10:26:58 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:26:58 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Iteration 2
+08-28 10:26:58 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Training policy...
+08-28 10:27:03 HalfCheetah_q3_2019-08-28_10-21-10 INFO     loss start to end: 0.019420715, 0.010536523
+08-28 10:27:03 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Gathering rollouts...
+08-28 10:29:47 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: mean([0. 0. 0. 0. 0. 0.])
+08-28 10:29:47 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: std([0.5 0.5 0.5 0.5 0.5 0.5])
+08-28 10:29:47 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Appending dataset...
+08-28 10:29:47 HalfCheetah_q3_2019-08-28_10-21-10 INFO     -----------------  -----------
+08-28 10:29:47 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Itr                  2
+08-28 10:29:47 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnAvg          229.946
+08-28 10:29:47 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMax          312.553
+08-28 10:29:47 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMin          141.188
+08-28 10:29:47 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnStd           48.903
+08-28 10:29:47 HalfCheetah_q3_2019-08-28_10-21-10 INFO     TrainingLossFinal    0.0105365
+08-28 10:29:47 HalfCheetah_q3_2019-08-28_10-21-10 INFO     TrainingLossStart    0.0194207
+08-28 10:29:47 HalfCheetah_q3_2019-08-28_10-21-10 INFO     -----------------  -----------
+08-28 10:29:47 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:29:47 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : total      169.5 (100.0%)
+08-28 10:29:47 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : get action 164.1 (96.8%)
+08-28 10:29:47 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : train policy 4.6 (2.7%)
+08-28 10:29:47 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : env step   0.6 (0.4%)
+08-28 10:29:47 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : other      0.1 (0.1%)
+08-28 10:29:47 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:29:47 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Iteration 3
+08-28 10:29:47 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Training policy...
+08-28 10:29:54 HalfCheetah_q3_2019-08-28_10-21-10 INFO     loss start to end: 0.011747541, 0.007406083
+08-28 10:29:54 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Gathering rollouts...
+08-28 10:32:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: mean([0. 0. 0. 0. 0. 0.])
+08-28 10:32:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: std([0.5 0.5 0.5 0.5 0.5 0.5])
+08-28 10:32:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Appending dataset...
+08-28 10:32:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     -----------------  ------------
+08-28 10:32:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Itr                  3
+08-28 10:32:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnAvg          103.503
+08-28 10:32:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMax          154.284
+08-28 10:32:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMin           22.7518
+08-28 10:32:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnStd           31.5584
+08-28 10:32:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     TrainingLossFinal    0.00740608
+08-28 10:32:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     TrainingLossStart    0.0117475
+08-28 10:32:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     -----------------  ------------
+08-28 10:32:45 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:32:45 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : total      177.4 (100.0%)
+08-28 10:32:45 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : get action 169.8 (95.7%)
+08-28 10:32:45 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : train policy 6.9 (3.9%)
+08-28 10:32:45 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : env step   0.6 (0.4%)
+08-28 10:32:45 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : other      0.1 (0.1%)
+08-28 10:32:45 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:32:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Iteration 4
+08-28 10:32:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Training policy...
+08-28 10:32:54 HalfCheetah_q3_2019-08-28_10-21-10 INFO     loss start to end: 0.010813474, 0.009717162
+08-28 10:32:54 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Gathering rollouts...
+08-28 10:35:44 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: mean([0. 0. 0. 0. 0. 0.])
+08-28 10:35:44 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: std([0.5 0.5 0.5 0.5 0.5 0.5])
+08-28 10:35:44 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Appending dataset...
+08-28 10:35:44 HalfCheetah_q3_2019-08-28_10-21-10 INFO     -----------------  ------------
+08-28 10:35:44 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Itr                  4
+08-28 10:35:44 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnAvg          132.452
+08-28 10:35:44 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMax          199.805
+08-28 10:35:44 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMin           87.8611
+08-28 10:35:44 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnStd           37.0591
+08-28 10:35:44 HalfCheetah_q3_2019-08-28_10-21-10 INFO     TrainingLossFinal    0.00971716
+08-28 10:35:44 HalfCheetah_q3_2019-08-28_10-21-10 INFO     TrainingLossStart    0.0108135
+08-28 10:35:44 HalfCheetah_q3_2019-08-28_10-21-10 INFO     -----------------  ------------
+08-28 10:35:44 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:35:44 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : total      179.4 (100.0%)
+08-28 10:35:44 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : get action 169.8 (94.7%)
+08-28 10:35:44 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : train policy 8.8 (4.9%)
+08-28 10:35:44 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : env step   0.6 (0.3%)
+08-28 10:35:44 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : other      0.1 (0.1%)
+08-28 10:35:44 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:35:44 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Iteration 5
+08-28 10:35:44 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Training policy...
+08-28 10:35:54 HalfCheetah_q3_2019-08-28_10-21-10 INFO     loss start to end: 0.010452086, 0.008770506
+08-28 10:35:54 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Gathering rollouts...
+08-28 10:38:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: mean([0. 0. 0. 0. 0. 0.])
+08-28 10:38:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: std([0.5 0.5 0.5 0.5 0.5 0.5])
+08-28 10:38:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Appending dataset...
+08-28 10:38:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     -----------------  ------------
+08-28 10:38:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Itr                  5
+08-28 10:38:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnAvg          160.055
+08-28 10:38:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMax          229.556
+08-28 10:38:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMin          106.218
+08-28 10:38:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnStd           42.0011
+08-28 10:38:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     TrainingLossFinal    0.00877051
+08-28 10:38:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     TrainingLossStart    0.0104521
+08-28 10:38:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     -----------------  ------------
+08-28 10:38:45 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:38:45 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : total      180.5 (100.0%)
+08-28 10:38:45 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : get action 170.2 (94.3%)
+08-28 10:38:45 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : train policy 9.5 (5.3%)
+08-28 10:38:45 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : env step   0.6 (0.3%)
+08-28 10:38:45 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : other      0.1 (0.1%)
+08-28 10:38:45 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:38:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Iteration 6
+08-28 10:38:45 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Training policy...
+08-28 10:38:56 HalfCheetah_q3_2019-08-28_10-21-10 INFO     loss start to end: 0.009163296, 0.009489049
+08-28 10:38:56 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Gathering rollouts...
+08-28 10:41:43 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: mean([0. 0. 0. 0. 0. 0.])
+08-28 10:41:43 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: std([0.5 0.5 0.5 0.5 0.5 0.5])
+08-28 10:41:43 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Appending dataset...
+08-28 10:41:43 HalfCheetah_q3_2019-08-28_10-21-10 INFO     -----------------  ------------
+08-28 10:41:43 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Itr                  6
+08-28 10:41:43 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnAvg          202.392
+08-28 10:41:43 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMax          230.557
+08-28 10:41:43 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMin          158.107
+08-28 10:41:43 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnStd           24.7145
+08-28 10:41:43 HalfCheetah_q3_2019-08-28_10-21-10 INFO     TrainingLossFinal    0.00948905
+08-28 10:41:43 HalfCheetah_q3_2019-08-28_10-21-10 INFO     TrainingLossStart    0.0091633
+08-28 10:41:43 HalfCheetah_q3_2019-08-28_10-21-10 INFO     -----------------  ------------
+08-28 10:41:43 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:41:43 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : total      178.5 (100.0%)
+08-28 10:41:43 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : get action 166.4 (93.2%)
+08-28 10:41:43 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : train policy 11.4 (6.4%)
+08-28 10:41:43 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : env step   0.6 (0.3%)
+08-28 10:41:43 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : other      0.2 (0.1%)
+08-28 10:41:43 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:41:43 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Iteration 7
+08-28 10:41:43 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Training policy...
+08-28 10:41:57 HalfCheetah_q3_2019-08-28_10-21-10 INFO     loss start to end: 0.008658474, 0.006981554
+08-28 10:41:57 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Gathering rollouts...
+08-28 10:45:08 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: mean([0. 0. 0. 0. 0. 0.])
+08-28 10:45:08 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: std([0.5 0.5 0.5 0.5 0.5 0.5])
+08-28 10:45:08 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Appending dataset...
+08-28 10:45:08 HalfCheetah_q3_2019-08-28_10-21-10 INFO     -----------------  ------------
+08-28 10:45:08 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Itr                  7
+08-28 10:45:08 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnAvg          168.317
+08-28 10:45:08 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMax          224.036
+08-28 10:45:08 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMin          109.909
+08-28 10:45:08 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnStd           28.9162
+08-28 10:45:08 HalfCheetah_q3_2019-08-28_10-21-10 INFO     TrainingLossFinal    0.00698155
+08-28 10:45:08 HalfCheetah_q3_2019-08-28_10-21-10 INFO     TrainingLossStart    0.00865847
+08-28 10:45:08 HalfCheetah_q3_2019-08-28_10-21-10 INFO     -----------------  ------------
+08-28 10:45:08 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:45:08 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : total      204.5 (100.0%)
+08-28 10:45:08 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : get action 190.3 (93.0%)
+08-28 10:45:08 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : train policy 13.5 (6.6%)
+08-28 10:45:08 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : env step   0.6 (0.3%)
+08-28 10:45:08 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : other      0.1 (0.1%)
+08-28 10:45:08 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:45:08 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Iteration 8
+08-28 10:45:08 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Training policy...
+08-28 10:45:23 HalfCheetah_q3_2019-08-28_10-21-10 INFO     loss start to end: 0.00787084, 0.008060165
+08-28 10:45:23 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Gathering rollouts...
+08-28 10:48:17 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: mean([0. 0. 0. 0. 0. 0.])
+08-28 10:48:17 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: std([0.5 0.5 0.5 0.5 0.5 0.5])
+08-28 10:48:17 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Appending dataset...
+08-28 10:48:17 HalfCheetah_q3_2019-08-28_10-21-10 INFO     -----------------  ------------
+08-28 10:48:17 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Itr                  8
+08-28 10:48:17 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnAvg          173.357
+08-28 10:48:17 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMax          230.415
+08-28 10:48:17 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMin          126.244
+08-28 10:48:17 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnStd           33.3055
+08-28 10:48:17 HalfCheetah_q3_2019-08-28_10-21-10 INFO     TrainingLossFinal    0.00806016
+08-28 10:48:17 HalfCheetah_q3_2019-08-28_10-21-10 INFO     TrainingLossStart    0.00787084
+08-28 10:48:17 HalfCheetah_q3_2019-08-28_10-21-10 INFO     -----------------  ------------
+08-28 10:48:17 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:48:17 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : total      189.0 (100.0%)
+08-28 10:48:17 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : get action 173.4 (91.7%)
+08-28 10:48:17 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : train policy 14.8 (7.9%)
+08-28 10:48:17 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : env step   0.6 (0.3%)
+08-28 10:48:17 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : other      0.1 (0.1%)
+08-28 10:48:17 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:48:17 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Iteration 9
+08-28 10:48:17 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Training policy...
+08-28 10:48:33 HalfCheetah_q3_2019-08-28_10-21-10 INFO     loss start to end: 0.008465872, 0.008357636
+08-28 10:48:33 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Gathering rollouts...
+08-28 10:51:27 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: mean([0. 0. 0. 0. 0. 0.])
+08-28 10:51:27 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: std([0.5 0.5 0.5 0.5 0.5 0.5])
+08-28 10:51:27 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Appending dataset...
+08-28 10:51:27 HalfCheetah_q3_2019-08-28_10-21-10 INFO     -----------------  ------------
+08-28 10:51:27 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Itr                  9
+08-28 10:51:27 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnAvg          156.609
+08-28 10:51:27 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMax          234.422
+08-28 10:51:27 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMin           66.3144
+08-28 10:51:27 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnStd           43.8122
+08-28 10:51:27 HalfCheetah_q3_2019-08-28_10-21-10 INFO     TrainingLossFinal    0.00835764
+08-28 10:51:27 HalfCheetah_q3_2019-08-28_10-21-10 INFO     TrainingLossStart    0.00846587
+08-28 10:51:27 HalfCheetah_q3_2019-08-28_10-21-10 INFO     -----------------  ------------
+08-28 10:51:27 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:51:27 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : total      190.6 (100.0%)
+08-28 10:51:27 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : get action 173.3 (90.9%)
+08-28 10:51:27 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : train policy 16.5 (8.7%)
+08-28 10:51:27 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : env step   0.6 (0.3%)
+08-28 10:51:27 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : other      0.1 (0.1%)
+08-28 10:51:27 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:51:27 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Iteration 10
+08-28 10:51:27 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Training policy...
+08-28 10:51:46 HalfCheetah_q3_2019-08-28_10-21-10 INFO     loss start to end: 0.008964146, 0.0075866957
+08-28 10:51:46 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Gathering rollouts...
+08-28 10:54:39 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: mean([0. 0. 0. 0. 0. 0.])
+08-28 10:54:39 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Cross Entropy method: std([0.5 0.5 0.5 0.5 0.5 0.5])
+08-28 10:54:39 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Appending dataset...
+08-28 10:54:39 HalfCheetah_q3_2019-08-28_10-21-10 INFO     -----------------  ------------
+08-28 10:54:39 HalfCheetah_q3_2019-08-28_10-21-10 INFO     Itr                 10
+08-28 10:54:39 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnAvg          185.157
+08-28 10:54:39 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMax          277.111
+08-28 10:54:39 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnMin          117.134
+08-28 10:54:39 HalfCheetah_q3_2019-08-28_10-21-10 INFO     ReturnStd           51.066
+08-28 10:54:39 HalfCheetah_q3_2019-08-28_10-21-10 INFO     TrainingLossFinal    0.0075867
+08-28 10:54:39 HalfCheetah_q3_2019-08-28_10-21-10 INFO     TrainingLossStart    0.00896415
+08-28 10:54:39 HalfCheetah_q3_2019-08-28_10-21-10 INFO     -----------------  ------------
+08-28 10:54:39 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
+08-28 10:54:39 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : total      191.2 (100.0%)
+08-28 10:54:39 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : get action 172.1 (90.0%)
+08-28 10:54:39 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : train policy 18.4 (9.6%)
+08-28 10:54:39 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : env step   0.6 (0.3%)
+08-28 10:54:39 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    : other      0.1 (0.1%)
+08-28 10:54:39 HalfCheetah_q3_2019-08-28_10-21-10 DEBUG    
