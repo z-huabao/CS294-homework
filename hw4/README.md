@@ -20,7 +20,7 @@
 ### Cost Function
 
 对于一个比如15步的轨迹，怎样评价有多好呢？其实还是累计每一步的cost
-（类似reward，但是基于模型的模拟器没有reward，所以要自定义一个`cost_fn`）
+（类似reward，但是基于模型的模拟器没有reward，所以要自定义一个`cost_fn`，而且cost越小越好）
 
 `cost_fn`用来评价单步动作的好坏，不同的环境评价策略也不同，
 这次作业的`HalfCheetah`环境是判断机器人两条腿和脖子的相对关系是否有利于跑步来评价的，
@@ -58,5 +58,5 @@
 <div align=center>
 <img src="./data/HalfCheetah_q3_nn_layers.png" height="300px">
 <img src="./data/HalfCheetah_q3_actions.png" height="300px">
-<img src="./data/HalfCheetah_q3_mpc_horizon.png" height="300px">
+<img src="./data/HalfCheetah_q3_horizon.png" height="300px">
 </div>
