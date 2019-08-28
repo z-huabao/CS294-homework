@@ -1,8 +1,12 @@
+import os
 import tensorflow as tf
 import numpy as np
 
 import utils
+from logger import logger
 
+tf.logging.set_verbosity(tf.logging.ERROR)
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 class ModelBasedPolicy(object):
 
@@ -23,10 +27,26 @@ class ModelBasedPolicy(object):
         self._num_random_action_selection = num_random_action_selection
         self._nn_layers = nn_layers
         self._learning_rate = 1e-2
-        self._use_CEM = kwargs.get('use_CEM')  # Cross Entropy Method
+        self._cem = kwargs.get('cem')  # Cross Entropy Method
+        logger.info('action space: low(%s), high(%s), dim(%s)' % \
+            (self._action_space_low, self._action_space_high, self._action_dim))
+        if self._cem:
+            print('\nuse Cross Entropy Method, delta: %s \n' % self._cem)
+            mean = (self._action_space_high + self._action_space_low) / 2.
+            std  = (self._action_space_high - self._action_space_low) / 4.
+            self._action_mean = tf.get_variable("action_mean", dtype=tf.float32,
+                initializer=tf.constant(mean))
+            self._action_std = tf.get_variable("action_std", dtype=tf.float32,
+                initializer=tf.constant(std))
+            self._best_actions = tf.zeros([0, self._action_dim])
+            # self._best_actions = tf.get_variable('best_actions', dtype=tf.float32,
+                # initializer=tf.constant(np.zeros([1000, self._action_dim])))
+            # self._insert_id = tf.get_variable('best_actions', dtype=tf.int64,
+                # initializer=tf.constant(1))
 
         self._sess, self._state_ph, self._action_ph, self._next_state_ph,\
-            self._next_state_pred, self._loss, self._optimizer, self._best_action = self._setup_graph()
+            self._next_state_pred, self._loss, self._optimizer, \
+            self._best_action = self._setup_graph()
 
     def _setup_placeholders(self):
         """
@@ -140,26 +160,51 @@ class ModelBasedPolicy(object):
         """
         ### PROBLEM 2
         ### YOUR CODE HERE
-        # raise NotImplementedError
-        if self._use_CEM:
-            # Cross Entropy Method
-            pass
+        shape = [self._horizon, self._num_random_action_selection, self._action_dim]
+        if self._cem:
+            actions = tf.random_normal(shape,
+                    mean=self._action_mean, stddev=self._action_std)
+            actions = tf.clip_by_value(actions,
+                    self._action_space_low, self._action_space_high)
         else:
-            states = tf.stack([state_ph[0]] * self._num_random_action_selection)
-            actions = tf.random_uniform(
-                shape=[self._horizon, self._num_random_action_selection, self._action_dim],
-                minval=self._action_space_low,
-                maxval=self._action_space_high,
-            )
-            costs = tf.zeros([self._num_random_action_selection])
-            for i in range(self._horizon):
-                next_states = self._dynamics_func(states, actions[i], True)
-                costs += self._cost_fn(states, actions[i], next_states)
-                states = next_states
+            actions = tf.random_uniform(shape,
+                minval=self._action_space_low, maxval=self._action_space_high)
 
-            best_action = actions[0, tf.argmin(costs)]
+        costs = tf.zeros(self._num_random_action_selection)
+        states = tf.stack([state_ph[0]] * self._num_random_action_selection)
+        for i in range(self._horizon):
+            next_states = self._dynamics_func(states, actions[i], reuse=True)
+            costs += self._cost_fn(states, actions[i], next_states)
+            states = next_states
 
-        return best_action
+        s = tf.argsort(costs)
+        best_action = actions[0, s[0]]
+        if self._cem:
+            # Cross Entropy Method
+            # ne = int(0.1 * self._num_random_action_selection) or 1
+            # actions = tf.gather(actions, s[:ne], axis=1)
+            self._best_actions = tf.concat([self._best_actions[-999:], best_action[None,:]], 0)
+            mean = tf.math.reduce_mean(self._best_actions, [0, 1])
+            std  = tf.math.reduce_std(self._best_actions, [0, 1])
+            if self._best_actions.shape[0].value > 100:
+                # mean = (1-self._cem)*self._action_mean + self._cem*mean
+                # std  = (1-self._cem)*self._action_std  + self._cem*std
+
+                # a_range = self._action_space_high - self._action_space_low
+                # std = tf.clip_by_value(std, a_range/6, a_range/2)
+
+                mean = self._action_mean.assign(mean)
+                std  = self._action_std.assign(std)
+            return [best_action, mean, std, tf.gather(costs, s[:5])]
+        else:
+            return best_action
+
+    def logger_cem(self):
+        if self._cem:
+            mean = self._action_mean.eval(session=self._sess)
+            std = self._action_std.eval(session=self._sess)
+            logger.info('Cross Entropy method: mean(%s)'%mean)
+            logger.info('Cross Entropy method: std(%s)'%std)
 
     def _setup_graph(self):
         """
@@ -218,7 +263,6 @@ class ModelBasedPolicy(object):
 
         ### PROBLEM 1
         ### YOUR CODE HERE
-        # raise NotImplementedError
         next_state_pred = self._sess.run(self._next_state_pred, {
             self._state_ph: [state],
             self._action_ph: [action],
@@ -238,8 +282,11 @@ class ModelBasedPolicy(object):
 
         ### PROBLEM 2
         ### YOUR CODE HERE
-        # raise NotImplementedError
         best_action = self._sess.run(self._best_action, {self._state_ph: [state]})
+        if self._cem:
+            best_action, mean, std, cost = best_action
+            # print(mean, std)
+            # print(best_action, cost)
 
         assert np.shape(best_action) == (self._action_dim,)
         return best_action

@@ -48,12 +48,16 @@
 
 #### Problem 2
 
+- 随机采集一波数据训练，提升明显
+
 | Return          | ReturnAvg | ReturnMax | ReturnMin | ReturnStd |
 |-----------------|-----------|-----------|-----------|-----------|
 | Random policy   | -151.737  | -85.9306  | -234.441  | 41.4153   |
 | Training policy | 106.774   | 183.864   | -11.7999  | 60.7897   |
 
 #### Problem 3
+
+- 在线增加数据训练，提升更多；以及分析参数的影响。
 
 <div align=center>
 <img src="./data/HalfCheetah_q3_nn_layers.png" height="300px">

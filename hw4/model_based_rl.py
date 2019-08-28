@@ -7,6 +7,7 @@ from model_based_policy import ModelBasedPolicy
 import utils
 from logger import logger
 from timer import timeit
+from tqdm import tqdm
 
 
 class ModelBasedRL(object):
@@ -50,7 +51,7 @@ class ModelBasedRL(object):
     def _gather_rollouts(self, policy, num_rollouts):
         dataset = utils.Dataset()
 
-        for _ in range(num_rollouts):
+        for _ in tqdm(range(num_rollouts)):
             state = self._env.reset()
             done = False
             t = 0
@@ -185,6 +186,8 @@ class ModelBasedRL(object):
         Starting with the random dataset, train the policy on the dataset, gather rollouts with the policy,
         append the new rollouts to the existing dataset, and repeat
         """
+        self._policy.logger_cem()
+
         dataset = self._random_dataset
 
         itr = -1
@@ -207,6 +210,7 @@ class ModelBasedRL(object):
             logger.info('Gathering rollouts...')
             # raise NotImplementedError
             new_dataset = self._gather_rollouts(self._policy, self._num_onpolicy_rollouts)
+            self._policy.logger_cem()
 
             ### PROBLEM 3
             ### YOUR CODE HERE
